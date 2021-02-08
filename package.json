@@ -1,15 +1,16 @@
 {
   "name": "@serby/wiki-renderer",
-  "description": "",
+  "description": "Typescript rendering of document components for Media Wiki.",
   "version": "1.0.0",
   "main": "./dist/index.js",
   "scripts": {
     "test": "jest --coverage src",
     "test:watch": "jest --watch src",
-    "lint": "yarn run lint:json && yarn run lint:ts",
+    "lint": "npm run lint:json && npm run lint:ts",
     "lint:json": "prettier --list-different .eslintrc *.json",
     "lint:ts": "eslint --ext .ts --ignore-path .gitignore src",
-    "build": "tsc"
+    "build": "tsc",
+    "prepublishOnly": "npm run test && npm run test && npm run build"
   },
   "keywords": [],
   "author": "Paul Serby",
