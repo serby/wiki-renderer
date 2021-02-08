@@ -11,7 +11,7 @@ npm install
 
 ```typescript
 
-import { h1 } from "@amzn/wiki-renderer"
+import { h1 } from "@serby/wiki-renderer"
 
 h1('This is a heading')
 
