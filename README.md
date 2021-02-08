@@ -1,6 +1,6 @@
 # Wiki Renderer
 
-Typescript rendering of document components for Media Wiki
+Typescript rendering of document components for Media Wiki.
 ## Install
 
 ```

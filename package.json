@@ -1,5 +1,5 @@
 {
-  "name": "@amzn/wiki-renderer",
+  "name": "@serby/wiki-renderer",
   "description": "",
   "version": "1.0.0",
   "main": "./dist/index.js",
