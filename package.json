@@ -3,6 +3,7 @@
   "description": "Typescript rendering of document components for Media Wiki.",
   "version": "1.0.1",
   "main": "./dist/index.js",
+  "types": "dist/index.d.ts",
   "files": [
     "dist/**/*"
   ],
