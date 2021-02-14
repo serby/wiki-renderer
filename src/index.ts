@@ -1,8 +1,12 @@
 import styleToCss from "style-object-to-css-string";
-import { Properties as CssProperties } from "csstype";
+import { Properties } from "csstype";
+
+export type CssProperties = Properties;
 
 export const addStyle = (styles?: CssProperties): string =>
-  styles ? `(% style="${styleToCss(styles)}" %) ` : "";
+  styles && Object.keys(styles).length > 0
+    ? `(% style="${styleToCss(styles)}" %) `
+    : "";
 
 export const cell = (
   style: CssProperties,
@@ -37,3 +41,20 @@ export const underline = (text: string): string => `__${text}__`;
 export const hr = (): string => `----\n`;
 export const link = (text: string, href: string): string =>
   `[[${text}>>${href}]]`;
+
+export const p = (text: string) => {
+  return `${text}\n`;
+};
+
+export const table = row;
+
+const createBanner = (type: string) => (
+  ...children: Array<string>
+): string => `{{${type}}}
+${children.join("\n")}
+{{/${type}}}`;
+
+export const infoBanner = createBanner("info");
+export const warningBanner = createBanner("warning");
+export const successBanner = createBanner("success");
+export const errorBanner = createBanner("error");

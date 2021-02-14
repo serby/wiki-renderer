@@ -1,4 +1,4 @@
-import { addStyle, html, link, strong, underline } from "@/index";
+import { addStyle, html, link, strong, underline, infoBanner } from "@/index";
 
 describe("wiki-renderer", () => {
   describe("addStyle()", () => {
@@ -29,6 +29,20 @@ describe("wiki-renderer", () => {
       expect(output).toBe("__Hello world__");
     });
   });
+  describe("addStyle()", () => {
+    it("should not add empty styling", () => {
+      const output = addStyle();
+      expect(output).toBe("");
+    });
+    it("should not add empty styling for empty object", () => {
+      const output = addStyle({});
+      expect(output).toBe("");
+    });
+    it("should add styling", () => {
+      const output = addStyle({ color: "red" });
+      expect(output).toBe('(% style="color: red;" %) ');
+    });
+  });
   describe("html()", () => {
     it("should add html formatting to a single item", () => {
       const output = html("<p>Hello</p>");
@@ -37,6 +51,12 @@ describe("wiki-renderer", () => {
     it("should add html formatting to all args", () => {
       const output = html("<p>Hello</p>", "<em>World</em>");
       expect(output).toBe("{{html}}\n<p>Hello</p><em>World</em>\n{{/html}}");
+    });
+  });
+  describe("infoBanner()", () => {
+    it("should format as info banner", () => {
+      const output = infoBanner("Hello");
+      expect(output).toBe("{{info}}\nHello\n{{/info}}");
     });
   });
 });
