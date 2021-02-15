@@ -1,16 +1,31 @@
-import { addStyle, html, link, strong, underline, infoBanner } from "@/index";
+import { addStyle, html, link, strong, underline, infoBanner } from "..";
 
 describe("wiki-renderer", () => {
   describe("addStyle()", () => {
-    it("should return nothing by default", () => {
+    it("should not add empty styling", () => {
       const output = addStyle();
       expect(output).toBe("");
     });
-    it("should work with single style", () => {
-      const output = addStyle({ display: "none" });
-      expect(output).toBe('(% style="display: none;" %) ');
+    it("should not add empty styling for empty object", () => {
+      const output = addStyle({});
+      expect(output).toBe("");
+    });
+    it("should add styling as expected", () => {
+      const output = addStyle({ color: "red" });
+      expect(output).toBe('(% style="color: red;" %)');
+    });
+    it("should work with multiple styles", () => {
+      const output = addStyle({
+        color: "red",
+        fontWeight: "bold",
+        paddingLeft: "2em",
+      });
+      expect(output).toBe(
+        '(% style="color: red;font-weight: bold;padding-left: 2em;" %)'
+      );
     });
   });
+
   describe("link()", () => {
     it("should create links", () => {
       const output = link("Hello", "http://foo.com");
@@ -29,20 +44,7 @@ describe("wiki-renderer", () => {
       expect(output).toBe("__Hello world__");
     });
   });
-  describe("addStyle()", () => {
-    it("should not add empty styling", () => {
-      const output = addStyle();
-      expect(output).toBe("");
-    });
-    it("should not add empty styling for empty object", () => {
-      const output = addStyle({});
-      expect(output).toBe("");
-    });
-    it("should add styling as expected", () => {
-      const output = addStyle({ color: "red" });
-      expect(output).toBe('(% style="color: red;" %)');
-    });
-  });
+
   describe("html()", () => {
     it("should add html formatting to a single item", () => {
       const output = html("<p>Hello</p>");

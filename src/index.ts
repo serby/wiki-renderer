@@ -5,7 +5,7 @@ export type CssProperties = Properties;
 
 export const addStyle = (styles?: CssProperties): string =>
   styles && Object.keys(styles).length > 0
-    ? `(% style="${styleToCss(styles)}" %)`
+    ? `(% style="${styleToCss(styles).replace(/\n/g, "")}" %)`
     : "";
 
 export const cell = (
