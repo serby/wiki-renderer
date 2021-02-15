@@ -38,9 +38,9 @@ describe("wiki-renderer", () => {
       const output = addStyle({});
       expect(output).toBe("");
     });
-    it("should add styling", () => {
+    it("should add styling as expected", () => {
       const output = addStyle({ color: "red" });
-      expect(output).toBe('(% style="color: red;" %) ');
+      expect(output).toBe('(% style="color: red;" %)');
     });
   });
   describe("html()", () => {
