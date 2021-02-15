@@ -11,15 +11,15 @@ export const addStyle = (styles?: CssProperties): string =>
 export const cell = (
   style: CssProperties,
   ...children: Array<string>
-): string => `|${addStyle(style)} ${children.join("")}`;
+): string => `|${addStyle(style)}${children.join("")}`;
 
 export const headerCell = (
   style: CssProperties,
   ...children: Array<string>
-): string => `|=${addStyle(style)} ${children.join("")}`;
+): string => `|=${addStyle(style)}${children.join("")}`;
 
 export const row = (style: CssProperties, ...children: Array<string>): string =>
-  `${addStyle(style)} ${children.join("")}\n`;
+  `${addStyle(style)}${children.join("")}\n`;
 
 export const multiline = (...children: Array<string>): string => `(((
 ${children.join("\n")}
