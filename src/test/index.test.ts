@@ -1,4 +1,14 @@
-import { addStyle, html, link, strong, underline, infoBanner } from "..";
+import {
+  addStyle,
+  html,
+  link,
+  strong,
+  underline,
+  infoBanner,
+  cell,
+  table,
+  row,
+} from "..";
 
 describe("wiki-renderer", () => {
   describe("addStyle()", () => {
@@ -59,6 +69,17 @@ describe("wiki-renderer", () => {
     it("should format as info banner", () => {
       const output = infoBanner("Hello");
       expect(output).toBe("{{info}}\nHello\n{{/info}}");
+    });
+  });
+  describe("table()", () => {
+    it("should have a newline after style", () => {
+      const output = table(
+        { color: "red" },
+        row({ color: "blue" }, cell({}, "A"), cell({ color: "green" }, "B"))
+      );
+      expect(output).toBe(
+        `(% style="color: red;" %)\n(% style="color: blue;" %)|A|(% style="color: green;" %)B\n\n`
+      );
     });
   });
 });

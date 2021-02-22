@@ -56,7 +56,10 @@ export const p = (text: string) => `${text}\n`;
 
 export const verbatim = (text: string) => `{{{${text}}}}`;
 
-export const table = row;
+export const table = (
+  style: CssProperties,
+  ...children: Array<string>
+): string => `${addStyle(style)}\n${children.join("")}\n`;
 
 const createBanner = (type: string) => (
   ...children: Array<string>
