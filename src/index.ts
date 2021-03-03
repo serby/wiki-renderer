@@ -35,12 +35,12 @@ export const htmlWithWiki = (
 ${children.join("")}
 {{/html}}`;
 
-export const h1 = (text: string): string => `= ${text} =\n\n`;
-export const h2 = (text: string): string => `== ${text} ==\n\n`;
-export const h3 = (text: string): string => `=== ${text} ===\n\n`;
-export const h4 = (text: string): string => `==== ${text} ====\n\n`;
-export const h5 = (text: string): string => `===== ${text} =====\n\n`;
-export const h6 = (text: string): string => `====== ${text} ======\n\n`;
+export const h1 = (text: string): string => `= ${text} =\n`;
+export const h2 = (text: string): string => `== ${text} ==\n`;
+export const h3 = (text: string): string => `=== ${text} ===\n`;
+export const h4 = (text: string): string => `==== ${text} ====\n`;
+export const h5 = (text: string): string => `===== ${text} =====\n`;
+export const h6 = (text: string): string => `====== ${text} ======\n`;
 export const strong = (text: string): string => `**${text}**`;
 export const emphasis = (text: string): string => `//${text}//`;
 export const strike = (text: string): string => `--${text}--`;

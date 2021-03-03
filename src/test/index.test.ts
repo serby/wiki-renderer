@@ -8,6 +8,9 @@ import {
   cell,
   table,
   row,
+  h1,
+  h2,
+  p,
 } from "..";
 
 describe("wiki-renderer", () => {
@@ -35,7 +38,24 @@ describe("wiki-renderer", () => {
       );
     });
   });
-
+  describe("h1()", () => {
+    it("should create header level 1", () => {
+      const output = h1("Hello");
+      expect(output).toBe("= Hello =\n");
+    });
+  });
+  describe("h2()", () => {
+    it("should create header level 2", () => {
+      const output = h2("Hello");
+      expect(output).toBe("== Hello ==\n");
+    });
+  });
+  describe("p()", () => {
+    it("should create value paragraph", () => {
+      const output = p("Hello");
+      expect(output).toBe("Hello\n");
+    });
+  });
   describe("link()", () => {
     it("should create links", () => {
       const output = link("Hello", "http://foo.com");
