@@ -8,29 +8,27 @@ export const addStyle = (styles?: CssProperties): string =>
     ? `(% style="${styleToCss(styles).replace(/\n/g, "")}" %)`
     : "";
 
-export const cell = (
-  style: CssProperties,
-  ...children: Array<string>
-): string => `|${addStyle(style)}${children.join("")}`;
+export const cell = (children: Array<string>, style?: CssProperties): string =>
+  `|${addStyle(style)}${children.join("")}`;
 
 export const headerCell = (
-  style: CssProperties,
-  ...children: Array<string>
+  children: Array<string>,
+  style?: CssProperties
 ): string => `|=${addStyle(style)}${children.join("")}`;
 
-export const row = (style: CssProperties, ...children: Array<string>): string =>
+export const row = (children: Array<string>, style?: CssProperties): string =>
   `${addStyle(style)}${children.join("")}\n`;
 
-export const multiline = (...children: Array<string>): string => `(((
+export const multiline = (children: Array<string>): string => `(((
 ${children.join("\n")}
 )))`;
 
-export const html = (...children: Array<string>): string => `{{html}}
+export const html = (children: Array<string>): string => `{{html}}
 ${children.join("")}
 {{/html}}`;
 
 export const htmlWithWiki = (
-  ...children: Array<string>
+  children: Array<string>
 ): string => `{{html wiki=true}}
 ${children.join("")}
 {{/html}}`;
@@ -56,13 +54,11 @@ export const p = (text: string) => `${text}\n`;
 
 export const verbatim = (text: string) => `{{{${text}}}}`;
 
-export const table = (
-  style: CssProperties,
-  ...children: Array<string>
-): string => `${addStyle(style)}\n${children.join("")}\n`;
+export const table = (children: Array<string>, style?: CssProperties): string =>
+  `${addStyle(style)}\n${children.join("")}\n`;
 
 const createBanner = (type: string) => (
-  ...children: Array<string>
+  children: Array<string>
 ): string => `{{${type}}}
 ${children.join("\n")}
 {{/${type}}}`;
