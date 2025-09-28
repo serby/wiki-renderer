@@ -75,6 +75,9 @@ const output = render(nodes, context);
 - `row(children: Array<Node>, style?: CssProperties): Node` - Table row
 - `cell(children: Array<Node>, style?: CssProperties): Node` - Table cell
 - `headerCell(children: Array<Node>, style?: CssProperties): Node` - Header cell
+- `enableSortableTables(): Node` - Enable sortable table functionality
+- `sortableTable(children: Array<Node>, id: string, style?: CssProperties): Node` - Sortable/filterable table
+- `sortableRow(children: Array<Node>, isHeader?: boolean, style?: CssProperties): Node` - Sortable table row
 
 ### Lists
 - `definitionList(children: Array<Node>): Node` - Definition list

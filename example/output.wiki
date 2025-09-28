@@ -1,0 +1,640 @@
+= Wiki Renderer Library - Complete Element Showcase =
+This comprehensive demonstration showcases **every single element** available in the wiki renderer library. Each section demonstrates the element's usage with //detailed explanations//, ##code examples##, and educational content about cats.
+
+{{toc/}}
+
+== Basic Text Elements ==
+
+=== Headers - All Six Levels ===
+Headers provide hierarchical document structure. The library supports all six HTML header levels:
+
+{{code language="typescript"}}
+// All header levels - from largest to smallest
+h1("Main Title")           // = Main Title =
+h2("Section Title")        // == Section Title ==
+h3("Subsection")          // === Subsection ===
+h4("Sub-subsection")      // ==== Sub-subsection ====
+h5("Minor Heading")       // ===== Minor Heading =====
+h6("Smallest Heading")    // ====== Smallest Heading ======
+{{/code}}
+
+==== Example Headers in Action ====
+Here are examples of the smaller header levels:
+
+===== This is a Level 5 Header - Cat Behavior =====
+
+====== This is a Level 6 Header - Purring Mechanics ======
+
+=== Text Formatting Elements ===
+Text can be formatted in multiple ways: **strong/bold text**, //emphasized/italic text//, __underlined text__, --strikethrough text--, ##monospace/code text##, text with ^^superscript^^ and ,,subscript,,.
+
+{{code language="typescript"}}
+// Text formatting examples - all inline elements
+strong("Bold text")           // **Bold text**
+emphasis("Italic text")       // //Italic text//
+underline("Underlined")       // __Underlined__
+strike("Crossed out")         // --Crossed out--
+mono("Code text")             // ##Code text##
+superscript("E=mc²")          // E=mc^^²^^
+subscript("H₂O")              // H,,₂,,O
+{{/code}}
+
+=== Paragraphs and Text Nodes ===
+Simple paragraph with string content - cats are fascinating creatures.
+Complex paragraph with **mixed** //formatting// and [[internal links>>CatBreeds]]. Cats have been companions to humans for over 9,000 years.
+Verbatim text preserves exact formatting: {{{  <cat>  exact  spacing  </cat>  }}} - useful for code snippets or ASCII art.
+
+{{code language="typescript"}}
+// Paragraph and text examples
+p("Simple string paragraph")
+p([text("Complex "), strong("formatted"), text(" paragraph")])
+text("Plain text node")
+verbatim("Exact formatting preserved")
+link("Link Text", "TargetPage")  // [[Link Text>>TargetPage]]
+{{/code}}
+
+----
+
+== Lists and Definitions ==
+
+=== Definition Lists ===
+Definition lists pair terms with their descriptions, perfect for glossaries and explanations:
+
+; Felis catus
+: The scientific name for domestic cats, meaning 'cat' in Latin
+; Purring
+: A continuous, soft vibrating sound cats make when content, stressed, or healing
+; Whiskers (Vibrissae)
+: Specialized sensory hairs that help cats navigate and sense their environment
+; Kneading
+: The rhythmic pushing motion cats make with their paws, often called 'making biscuits'
+
+{{code language="typescript"}}
+// Definition list example
+definitionList([
+  definitionTerm("Term 1"),
+  definitionDescription("Description of term 1"),
+  definitionTerm("Term 2"), 
+  definitionDescription("Description of term 2")
+])
+// Output:
+// ; Term 1
+// : Description of term 1
+// ; Term 2
+// : Description of term 2
+{{/code}}
+
+=== Blockquotes ===
+Blockquotes highlight important information, citations, or notable facts:
+
+> Cats have been associated with humans for at least 9,000 years, and are currently the most popular pet in the world, with over 600 million cats living in homes worldwide.
+
+> A cat has absolute emotional honesty: human beings, for one reason or another, may hide their feelings, but a cat does not.>  — Ernest Hemingway
+
+> The ancient Egyptians were the first to domesticate cats around 4,000 BCE. They considered cats sacred and even > //mummified//>  them alongside pharaohs.
+
+{{code language="typescript"}}
+// Blockquote examples
+blockquote([text("Single line quote")])
+blockquote([
+  text("Multi-line quote with "),
+  emphasis("formatting"),
+  text(" and multiple elements")
+])
+// Output: > prefixed lines
+{{/code}}
+
+----
+
+== Tables and Data Display ==
+
+=== Basic Tables ===
+Tables organize data in rows and columns. Here's a basic table without styling:
+
+|=Breed|=Origin|=Coat Length
+|Persian|Iran|Long
+|Siamese|Thailand|Short
+|Maine Coon|United States|Long
+
+=== Styled Tables ===
+Tables support CSS styling for enhanced presentation:
+(% style="border: 1px solid #ccc;border-collapse: collapse;width: 100%;" %)
+|=(% style="background-color: #f0f0f0;font-weight: bold;padding: 8px;" %)Cat Feature|=(% style="background-color: #f0f0f0;font-weight: bold;padding: 8px;" %)Description
+|(% style="color: #333;padding: 8px;" %)Night Vision|(% style="padding: 8px;" %)Cats can see in light levels six times lower than humans
+|(% style="color: #333;padding: 8px;" %)Hearing Range|(% style="padding: 8px;" %)Can hear frequencies up to 64,000 Hz (humans: 20,000 Hz)
+|(% style="color: #333;padding: 8px;" %)Flexibility|(% style="padding: 8px;" %)Can rotate their ears 180 degrees and have 32 muscles controlling each ear
+
+{{code language="typescript"}}
+// Table examples
+// Basic table
+table([
+  row([headerCell([text("Header 1")]), headerCell([text("Header 2")])]),
+  row([cell([text("Data 1")]), cell([text("Data 2")])])
+])
+
+// Styled table
+table([...rows], { border: "1px solid #ccc", borderCollapse: "collapse" })
+row([...cells], { backgroundColor: "#f5f5f5" })
+cell([text("Content")], { padding: "8px", color: "#333" })
+headerCell([text("Header")], { fontWeight: "bold", backgroundColor: "#e0e0e0" })
+{{/code}}
+
+=== Sortable Tables ===
+Advanced tables with sorting capabilities. This requires enableSortableTables() and uses sortableTable/sortableRow:
+
+{{enableSortableTables/}}
+
+(% class="grid sortable filterable doOddEven" id="catBreedsTable" %)
+(% class="sortHeader" %)|Cat Breed|Weight (lbs)|Lifespan (years)|Energy Level|Grooming Needs|Good with Kids|Shedding Level|Origin Country|Intelligence
+|Maine Coon|13-18|12-15|Medium|High|Excellent|High|United States|High
+|Persian|7-12|10-17|Low|Very High|Good|High|Iran|Medium
+|Siamese|6-14|11-15|Very High|Low|Excellent|Low|Thailand|Very High
+|British Shorthair|9-17|12-20|Low|Medium|Excellent|Medium|United Kingdom|Medium
+|Ragdoll|10-20|12-17|Low|Medium|Excellent|Medium|United States|Medium
+|Bengal|8-15|12-16|Very High|Low|Good|Low|United States|Very High
+|Russian Blue|7-12|15-20|Medium|Low|Good|Medium|Russia|High
+|Abyssinian|6-10|9-15|High|Low|Good|Low|Ethiopia|High
+|Scottish Fold|6-13|11-14|Medium|Medium|Excellent|Medium|Scotland|Medium
+
+{{code language="typescript"}}
+// Sortable table example
+enableSortableTables()  // Required for sortable functionality
+
+sortableTable([
+  sortableRow([...headerCells], true),  // isHeader = true
+  sortableRow([...dataCells]),          // Regular data rows
+  sortableRow([...dataCells])
+], "uniqueTableId")  // Must have unique ID
+{{/code}}
+
+----
+
+== Media and Visual Elements ==
+
+=== Images - All Parameter Variations ===
+Images support various formats and styling options using the [[image:...]] syntax:
+Simple icons: [[image:icon:star]] [[image:icon:exclamation]] [[image:icon:accept]] [[image:icon:arrow_right]]
+Image with style attribute: [[image:amazon-logo.png||style="width:100px; height:100px;"]]
+Image with width only: [[image:amazon-logo.png||width="100"]]
+Image with all parameters: [[image:cat-photo.jpg||alt="A beautiful cat" width="150" height="100" style="border: 2px solid #ccc; border-radius: 8px;"]]
+
+{{code language="typescript"}}
+// Image examples - all parameter variations
+image("icon:star")                    // [[image:icon:star]]
+image("logo.png", "Alt text")         // [[image:logo.png||alt="Alt text"]]
+image("logo.png", undefined, "100")   // [[image:logo.png||width="100"]]
+image("logo.png", undefined, undefined, undefined, "width:100px; height:100px;")
+// [[image:logo.png||style="width:100px; height:100px;"]]
+image("photo.jpg", "Alt", "150", "100", "border: 1px solid #ccc")
+// [[image:photo.jpg||alt="Alt" width="150" height="100" style="border: 1px solid #ccc"]]
+{{/code}}
+
+=== Mathematical Formulas ===
+Inline formulas can be embedded: {{formula}}E = mc^2{{/formula}}, {{formula}}a^2 + b^2 = c^2{{/formula}}, and {{formula}}\sum_{i=1}^{n} x_i{{/formula}}. Cats' jumping ability follows physics: {{formula}}h = \frac{v^2}{2g}{{/formula}} where h is height, v is initial velocity, and g is gravity.
+
+{{code language="typescript"}}
+// Formula examples
+formula("E = mc^2")        // {{formula}}E = mc^2{{/formula}}
+formula("∑(x_i)")          // {{formula}}∑(x_i){{/formula}}
+formula("\\frac{a}{b}")   // {{formula}}\frac{a}{b}{{/formula}}
+{{/code}}
+
+----
+
+== Code and Technical Content ==
+
+=== Code Blocks - Inline and Block ===
+Inline code like {{code}}const cat = new Cat(){{/code}} can be mixed with regular text. The ##code()## function automatically detects single-line vs multi-line content.
+Multi-line code blocks with syntax highlighting:
+
+{{code language="typescript"}}
+// TypeScript - Cat class implementation
+interface Cat {
+  name: string;
+  breed: string;
+  age: number;
+  weight: number;
+  purr(): void;
+  meow(): string;
+}
+
+class DomesticCat implements Cat {
+  constructor(
+    public name: string,
+    public breed: string,
+    public age: number,
+    public weight: number
+  ) {}
+  
+  purr(): void {
+    console.log("*purr purr*");
+  }
+  
+  meow(): string {
+    return `${this.name} says meow!`;
+  }
+  
+  calculateFoodPortion(): number {
+    // Adult cats need ~20 calories per pound
+    return this.weight * 20;
+  }
+}
+
+// Usage example
+const myCat = new DomesticCat("Whiskers", "Maine Coon", 3, 15);
+console.log(myCat.meow()); // "Whiskers says meow!"
+myCat.purr(); // *purr purr*
+{{/code}}
+
+{{code language="swift"}}
+// Swift/SwiftUI - Cat management app
+import SwiftUI
+
+struct Cat: Identifiable {
+    let id = UUID()
+    let name: String
+    let breed: String
+    let age: Int
+    let weight: Double
+    
+    func purr() {
+        print("*purr purr*")
+    }
+    
+    var dailyCalories: Double {
+        return weight * 20 // 20 calories per pound
+    }
+}
+
+struct CatView: View {
+    let cat: Cat
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text(cat.name)
+                .font(.title)
+                .fontWeight(.bold)
+            
+            HStack {
+                Text("Breed:")
+                    .fontWeight(.medium)
+                Text(cat.breed)
+            }
+            
+            HStack {
+                Text("Age:")
+                    .fontWeight(.medium)
+                Text("\(cat.age) years")
+            }
+            
+            HStack {
+                Text("Daily calories:")
+                    .fontWeight(.medium)
+                Text("\(Int(cat.dailyCalories))")
+            }
+            
+            Button("Make Purr") {
+                cat.purr()
+            }
+            .padding()
+            .background(Color.blue)
+            .foregroundColor(.white)
+            .cornerRadius(8)
+        }
+        .padding()
+        .background(Color.gray.opacity(0.1))
+        .cornerRadius(12)
+    }
+}
+{{/code}}
+
+{{code language="kotlin"}}
+// Kotlin - Cat data management
+data class Cat(
+    val name: String,
+    val breed: String,
+    val age: Int,
+    val weight: Double
+) {
+    fun purr() {
+        println("*purr purr*")
+    }
+    
+    fun meow(): String = "$name says meow!"
+    
+    val dailyCalories: Double
+        get() = weight * 20 // 20 calories per pound
+    
+    val isKitten: Boolean
+        get() = age < 1
+    
+    val isSenior: Boolean
+        get() = age >= 7
+}
+
+class CatShelter {
+    private val cats = mutableListOf<Cat>()
+    
+    fun addCat(cat: Cat) {
+        cats.add(cat)
+        println("Added ${cat.name} to the shelter")
+    }
+    
+    fun feedAllCats() {
+        cats.forEach { cat ->
+            println("Feeding ${cat.name} - ${cat.dailyCalories.toInt()} calories")
+            cat.purr()
+        }
+    }
+    
+    fun getCatsByBreed(breed: String): List<Cat> {
+        return cats.filter { it.breed.equals(breed, ignoreCase = true) }
+    }
+    
+    fun getKittens(): List<Cat> = cats.filter { it.isKitten }
+    
+    fun getSeniorCats(): List<Cat> = cats.filter { it.isSenior }
+}
+
+// Usage
+val shelter = CatShelter()
+shelter.addCat(Cat("Mittens", "Persian", 2, 8.5))
+shelter.addCat(Cat("Shadow", "Maine Coon", 5, 15.2))
+shelter.feedAllCats()
+{{/code}}
+
+{{code language="typescript"}}
+// Code function examples
+code("inline code")                    // {{code}}inline code{{/code}}
+code("multi\nline\ncode")            // {{code}}\nmulti\nline\ncode\n{{/code}}
+code("const x = 1", "typescript")      // {{code language="typescript"}}const x = 1{{/code}}
+
+// Automatic detection:
+code("single line") // Renders as inline
+code("line 1\nline 2") // Renders as block
+{{/code}}
+
+=== HTML Content ===
+Raw HTML can be embedded with or without wiki processing:
+
+{{html}}
+<div style='background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 15px; border-radius: 8px; margin: 10px 0;'><h4 style='margin: 0 0 10px 0;'>🐱 Cat Facts HTML Block</h4><p style='margin: 0;'>This is <strong>raw HTML</strong> content. Cats spend 70% of their lives sleeping - that's 13-16 hours a day!</p></div>
+{{/html}}
+
+{{html wiki=true}}
+<div class='wiki-enhanced' style='border: 2px dashed #ff6b6b; padding: 10px; background: #ffe0e0;'>This HTML block **processes wiki markup** within the HTML. Cats have //32 muscles// controlling each ear!</div>
+{{/html}}
+
+{{code language="typescript"}}
+// HTML examples
+html([text("<div>Raw HTML content - no wiki processing</div>")])
+htmlWithWiki([
+  text("<div>"), 
+  strong("Wiki markup"), 
+  text(" processed in HTML</div>")
+])
+{{/code}}
+
+----
+
+== Containers and Layout Elements ==
+
+=== Information Banners - All Types ===
+Banners highlight different types of information with semantic meaning:
+
+{{info}}
+📘 **Information Banner** - Cats have a third eyelid called a nictitating membrane that helps protect their eyes.
+{{/info}}
+
+{{warning}}
+⚠️ **Warning Banner** - Chocolate, onions, garlic, and grapes are //toxic to cats// and should never be given to them!
+{{/warning}}
+
+{{success}}
+✅ **Success Banner** - Your cat has been successfully registered for vaccination! Regular vet checkups keep cats healthy.
+{{/success}}
+
+{{error}}
+❌ **Error Banner** - Failed to connect to the veterinary database. Please check your internet connection.
+{{/error}}
+
+{{code language="typescript"}}
+// Banner examples - all four types
+infoBanner([text("Information message with "), strong("formatting")])
+warningBanner([text("Warning about "), emphasis("important"), text(" safety")])
+successBanner([text("Success confirmation message")])
+errorBanner([text("Error description and guidance")])
+{{/code}}
+
+=== Content Boxes ===
+Boxes group related content with optional titles:
+
+{{box}}
+This is a basic box without a title. Cats are crepuscular, meaning they're most active during dawn and dusk hours.Boxes can contain //any type// of content including paragraphs, lists, and other elements.
+{{/box}}
+
+{{box title="Cat Care Essentials"}}
+===== 🐾 Essential Cat Care Items =====
+
+; Litter Box
+: Clean daily, scoop waste immediately. One box per cat plus one extra.
+; Food and Water Bowls
+: Stainless steel or ceramic preferred. Avoid plastic which can harbor bacteria.
+; Scratching Post
+: Tall enough for full stretch, stable base. Cats need to scratch to maintain claw health.
+; Cat Carrier
+: Hard-sided carrier for vet visits. Leave it out so cats become comfortable with it.
+{{/box}}
+
+{{code language="typescript"}}
+// Box examples
+box([text("Content without title")])
+box([
+  h4("Title"),
+  text("Content with title")
+], "Box Title")
+{{/code}}
+
+=== Containers and Galleries ===
+Containers provide flexible layout options, galleries organize media:
+
+{{container}}
+This content is inside a basic container. Cats have excellent balance due to their flexible spine and inner ear structure.
+Containers help organize and structure content logically.
+{{/container}}
+
+
+{{container layoutStyle="columns"}}
+(((
+=== Column 1 ===This container uses column layout for better organization.Content flows in columns when space allows, perfect for side-by-side information.
+)))
+
+(((
+=== Column 2 ===Cats can rotate their ears 180 degrees independently to pinpoint sounds.
+)))
+
+(((
+=== Column 3 ===Cats can rotate their ears 180 degrees independently to pinpoint sounds.
+)))
+{{/container}}
+
+
+{{gallery}}
+[[image:icon:star]][[image:icon:accept]][[image:icon:exclamation]][[image:icon:arrow_right]]
+{{/gallery}}
+
+{{code language="typescript"}}
+// Container and gallery examples
+container([...content])                    // Basic container
+container([...content], "columns")        // Column layout
+gallery([
+  image("cat1.jpg"), 
+  image("cat2.jpg"), 
+  image("cat3.jpg")
+])
+{{/code}}
+
+=== Show/Hide Collapsible Sections ===
+Collapsible sections help organize large amounts of content:
+
+{{showhide}}
+===== Cat Breeds by Size Categories =====
+
+; Small Cats (5-10 lbs)
+: Singapura, Cornish Rex, Devon Rex, Japanese Bobtail, Munchkin
+; Medium Cats (8-12 lbs)
+: Siamese, Russian Blue, Abyssinian, British Shorthair, Scottish Fold
+; Large Cats (11-25 lbs)
+: Maine Coon, Ragdoll, Norwegian Forest Cat, Siberian, Savannah
+{{/showhide}}
+
+{{showhide title="Advanced Feline Nutrition"}}
+===== Detailed Cat Nutrition Information =====
+Cats are obligate carnivores, meaning they require nutrients found only in animal tissue.
+
+; Taurine
+: Essential amino acid found only in animal tissue. Deficiency causes heart problems and blindness.
+; Arachidonic Acid
+: Essential fatty acid cats cannot synthesize. Found in animal fats.
+; Vitamin A
+: Cats cannot convert beta-carotene to vitamin A like other animals. Must get it from animal liver.
+; Niacin (Vitamin B3)
+: Cats cannot synthesize enough niacin from tryptophan and need dietary sources.
+{{/showhide}}
+
+{{code language="typescript"}}
+// Show/hide examples
+showhide([...content])                     // Default title
+showhide([...content], "Custom Title")    // Custom title
+// Creates collapsible sections with {{showhide}} macro
+{{/code}}
+
+=== Multiline Content ===
+Multiline blocks preserve exact formatting and line breaks:
+
+(((
+🐱 Cat ASCII Art:   /\_/\    ( o.o )    > ^ <  Fun Cat Facts:• Cats have 32 muscles in each ear• A group of cats is called a 'clowder'• Cats can't taste sweetness• The oldest known pet cat was found in a 9,000-year-old grave
+)))
+
+{{code language="typescript"}}
+// Multiline example
+multiline([
+  text("Line 1: Preserves exact formatting"),
+  text("Line 2: Each text() becomes a separate line"),
+  text("Line 3: Perfect for ASCII art or structured data")
+])
+// Output wrapped in ((( ))) with line breaks preserved
+{{/code}}
+
+----
+
+== Navigation and Reference Elements ==
+
+=== Table of Contents ===
+The table of contents (shown at the top) automatically generates navigation from headers.
+
+{{code language="typescript"}}
+// Table of contents
+toc()  // {{toc/}} - Automatically generates from h1-h6 elements
+{{/code}}
+
+=== Document Tree and Sub-pages ===
+Document trees show hierarchical page structures, sub-pages list related content:
+
+{{documentTree/}}
+
+{{documentTree root="CatBreeds.WebHome" showRoot="true" limit="5" showAttachments="false"/}}
+
+{{subPages/}}
+
+{{subPages prefix="Cat" useTitle="true"/}}
+
+{{code language="typescript"}}
+// Document tree examples
+documentTree()                                    // Basic tree from current location
+documentTree("Root.Page", true, 10, false)      // Custom root, show root, depth 10, no files
+subPages()                                       // Basic sub-pages listing
+subPages("Prefix", true)                         // With prefix filter and titles
+{{/code}}
+
+=== Transclusion and Links ===
+Content can be transcluded from other pages, and [[internal links>>CatBreeds]] connect related content. Links use the ##[[text>>target]]## syntax.
+{{include reference="CatCareBasics"/}}
+
+{{code language="typescript"}}
+// Links and transclusion
+link("Link Text", "TargetPage")              // [[Link Text>>TargetPage]]
+transclude("PageName")                       // {{include reference="PageName"/}}
+{{/code}}
+
+----
+
+== Interactive and Special Elements ==
+
+=== FAQ Elements ===
+FAQ elements provide structured question-and-answer content:
+{{FAQ question="How often should I feed my cat?" answer="Adult cats should be fed 2-3 times per day with measured portions based on their weight and activity level. Kittens need more frequent feeding - 3-4 times daily."/}}
+{{FAQ question="Why do cats purr?" answer="Cats purr for various reasons: contentment, self-soothing when stressed or injured, healing (vibrations may promote bone healing at 25-50 Hz), and communication with humans and other cats."/}}
+{{FAQ question="How long do cats typically live?" answer="Indoor cats typically live 12-18 years, while outdoor cats have shorter lifespans of 2-5 years due to traffic, predators, disease, and other risks. Proper veterinary care extends lifespan significantly."/}}
+{{FAQ question="Do cats really have nine lives?" answer="No, this is a myth. Cats are excellent at surviving falls and escaping danger due to their flexible spine, righting reflex, and keen senses, but they have only one life like all animals."/}}
+
+{{code language="typescript"}}
+// FAQ examples
+faq("Question text", "Detailed answer text")
+// Creates: {{FAQ question="Question text" answer="Detailed answer text"/}}
+{{/code}}
+
+=== Comments and Footnotes ===
+Comments are hidden from normal view{{comment}}This is a hidden comment about cat behavior research from Cornell University{{/comment}}
+, while footnotes{{footnote}}Cats have been domesticated for approximately 9,000 years, with evidence from Cyprus{{/footnote}} provide additional information{{footnote}}The ancient Egyptians were among the first to domesticate cats around 4,000 BCE for pest control{{/footnote}} that appears at the bottom of the page{{footnote}}Modern house cats descended from African wildcats (Felis lybica){{/footnote}}.
+
+{{putFootnotes/}}
+
+{{code language="typescript"}}
+// Comments and footnotes
+comment("Hidden comment")                    // {{comment}}Hidden comment{{/comment}}
+footnote("Footnote text")                   // {{footnote}}Footnote text{{/footnote}}
+putFootnotes()                              // {{putFootnotes/}} - Renders all footnotes
+{{/code}}
+
+----
+
+== Complete Element Summary ==
+This comprehensive demonstration has showcased **every single element** available in the wiki renderer library:
+
+; Text Elements (13)
+: h1-h6, p, text, strong, emphasis, underline, strike, mono, superscript, subscript, verbatim, link, hr
+; Structure Elements (8)
+: definitionTerm, definitionDescription, definitionList, blockquote, table, row, cell, headerCell
+; Layout Elements (9)
+: box, container, gallery, showhide, multiline, infoBanner, warningBanner, successBanner, errorBanner
+; Media Elements (3)
+: image (with all parameters), formula, code (inline/block with language)
+; Advanced Elements (8)
+: html, htmlWithWiki, sortableTable, sortableRow, enableSortableTables, toc, documentTree, subPages
+; Interactive Elements (5)
+: faq, comment, footnote, putFootnotes, transclude
+
+{{success}}
+🎉 **Demo Complete!** All ##46 unique elements## demonstrated with //comprehensive examples//, **code snippets**, and educational cat content. The library supports everything from simple text to complex interactive components!
+{{/success}}
