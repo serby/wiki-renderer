@@ -13,7 +13,8 @@
     "test:watch": "jest --watch src",
     "lint": "npm run lint:json && npm run lint:ts",
     "lint:json": "prettier --list-different .eslintrc *.json",
-    "lint:ts": "eslint --ext .ts --ignore-path .gitignore src",
+    "lint:ts": "eslint --ext .ts --ignore-path .gitignore src example",
+    "lint:ts:fix": "eslint --fix --ext .ts --ignore-path .gitignore src example",
     "build": "tsc",
     "prepublishOnly": "npm run qa && npm run build"
   },
